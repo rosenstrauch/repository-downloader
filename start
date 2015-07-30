@@ -3,6 +3,16 @@
 if [ ! -f ./config.json ]; then
     cp ./config.tmpl.json config.json
     echo "config.json was not found. Initialized it with dummy data. Please fill it with correct data."
+    echo -n "use custom projects directory?"
+    read CUSTOMDIR
+    if [[ $CUSTOMDIR =~ ^[Yy]$ ]]; then
+      default="~/Projectrepos"
+      read -p "Enter absolute path to dotfiles_repo [$default]: " DOWNLOADDIR
+      DOWNLOADDIR=${DOWNLOADDIR:-$default}
+      echo "PATH is $DOWNLOADDIR"
+      sed -i "s#ABSOLUTEPROJECTPATH#$DOWNLOADDIR#" config.json
+      cp downloads/import.sh DOWNLOADDIR
+    fi
     exit 1;
 fi
 

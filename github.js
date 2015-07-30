@@ -174,11 +174,11 @@ function downloadRepos(repos, callback) {
     repos.forEach(function (c) {
 
         funcs.push(function (callback) {
-            var repo = new Repo("./downloads")
+            var repo = new Repo(Config.projectsdir)
               , path = "github/" + c.full_name
               ;
 
-            if (Fs.existsSync(__dirname + "/downloads/" + path)) {
+            if (Fs.existsSync(Config.projectsdir + "/" + path)) {
                 Logger.log("Repository already downloaded: " + c.full_name, "warn");
                 return callback();
             }

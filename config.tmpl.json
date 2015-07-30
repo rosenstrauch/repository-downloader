@@ -6,5 +6,6 @@
     "bitbucket": {
         "username": "your BitBucket username",
         "password": "your BitBucket password"
-    }
+    },
+    "projectsdir": "ABSOLUTEPROJECTPATH"
 }
