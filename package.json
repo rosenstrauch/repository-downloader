@@ -1,13 +1,13 @@
 {
-  "name": "repo-downloader",
-  "version": "1.2.0",
+  "name": "repository-downloader",
+  "version": "2.2.10",
   "description": "Download all the repositories from BitBucket and GitHub, including your account, teams and where you created pull requests.",
-  "main": "start",
   "dependencies": {
-    "bug-killer": "^1.0.0",
-    "gry": "^2.1.0",
-    "request": "^2.51.0",
-    "async": "^0.9.0"
+    "bug-killer": "^4.0.0",
+    "gry": "^4.0.0",
+    "request": "^2.62.0",
+    "async": "^1.4.2",
+    "same-time-limit": "^1.0.11"
   },
   "devDependencies": {},
   "scripts": {
@@ -25,7 +25,7 @@
     "github",
     "bitbucket"
   ],
-  "author": "Ionică Bizău <bizauionica@gmail.com>",
+  "author": "Ionică Bizău <bizauionica@gmail.com> (https://ionicabizau.net)",
   "license": "MIT",
   "contributors": [
     "longears http://pixelbutter.com"
@@ -33,5 +33,53 @@
   "bugs": {
     "url": "https://github.com/IonicaBizau/repository-downloader/issues"
   },
-  "homepage": "https://github.com/IonicaBizau/repository-downloader"
+  "homepage": "https://github.com/IonicaBizau/repository-downloader",
+  "blah": {
+    "title": "Repository Downloader",
+    "show_docs": false,
+    "installation": [
+      {
+        "h2": "Installation"
+      },
+      {
+        "code": {
+          "language": "sh",
+          "content": [
+            "$ git clone https://github.com/IonicaBizau/repository-downloader.git repo-downloader",
+            "$ cd repo-downloader",
+            "$ npm i",
+            "$ npm i -g git-stats-importer"
+          ]
+        }
+      },
+      {
+        "h2": "Usage"
+      },
+      {
+        "ol": [
+          "Copy `config.tmpl.json` into `config.json` and edit it with your GitHub and BitBucket usernames and passwords. If you're using [two factor authentication](https://help.github.com/articles/about-two-factor-authentication/) on github, please [create an access token](https://developer.github.com/v3/oauth_authorizations/#create-a-new-authorization) and fill it on password field.",
+          "Run `./start` and wait! :smile:"
+        ]
+      },
+      {
+        "p": ":bulb: You can pass arguments which are understood by `git-stats-importer` (e.g. `./start -e 'alice@example.com,bob@example.com'`)."
+      }
+    ]
+  },
+  "files": [
+    "bin/",
+    "app/",
+    "lib/",
+    "dist/",
+    "src/",
+    "scripts/",
+    "resources/",
+    "menu/",
+    "cli.js",
+    "index.js",
+    "bloggify.js",
+    "bloggify.json",
+    "bloggify/"
+  ],
+  "main": "lib/index.js"
 }

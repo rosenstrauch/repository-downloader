@@ -3,4 +3,7 @@
 *~
 *.log
 node_modules
-config.json
+*.env
+.DS_Store
+package-lock.json
+.bloggify/*

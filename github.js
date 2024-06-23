@@ -5,11 +5,10 @@ var Config = require("./config")
   , Repo = require("gry")
   , Async = require("async")
   , Fs = require("fs")
+  , SameTimeLimit = require("same-time-limit")
   ;
 
 // Logger configuration
-Logger.config.logLevel = 4;
-Logger.config.displayDate = false;
 Logger.config.progress = {
     color: "#3498db"
   , text: "   > "
@@ -173,6 +172,8 @@ function downloadRepos(repos, callback) {
 
     repos.forEach(function (c) {
 
+        if (!c) { return; }
+
         funcs.push(function (callback) {
             var repo = new Repo(Config.projectsdir)
               , path = "github/" + c.full_name
@@ -187,6 +188,7 @@ function downloadRepos(repos, callback) {
             repo.exec("clone " + c.ssh_url + " " + path, function (err) {
 
                 if (err) {
+                    Logger.log(err);
                     notDownloaded.push(c);
                     return callback();
                 }
@@ -197,7 +199,7 @@ function downloadRepos(repos, callback) {
         });
     });
 
-    Async.parallel(funcs, function (err) {
+    SameTimeLimit(funcs, 4, function (err, data) {
 
         if (notDownloaded.length) {
             Logger.log(notDownloaded.length + " repos failed to download. Trying again.", "warn");
